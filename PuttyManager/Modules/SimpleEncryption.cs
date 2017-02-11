@@ -14,12 +14,12 @@ namespace PuttyManager
         public SimpleEncryption(string password)
         {
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-            byte[] saltValueBytes = Encoding.UTF8.GetBytes(SaltValue);
+            byte[] saltValueBytes = Encoding.UTF8.GetBytes(Configuration.SaltValue);
 
-            hash = CalculateMD5Hash(SaltValue + password + SaltValue.Reverse());
+            hash = CalculateMD5Hash(Configuration.SaltValue + password + Configuration.SaltValue.Reverse());
 
-            _DeriveBytes = new Rfc2898DeriveBytes(passwordBytes, saltValueBytes, PasswordIterations);
-            _InitVectorBytes = Encoding.UTF8.GetBytes(InitVector);
+            _DeriveBytes = new Rfc2898DeriveBytes(passwordBytes, saltValueBytes, Configuration.PasswordIterations);
+            _InitVectorBytes = Encoding.UTF8.GetBytes(Configuration.InitVector);
             _KeyBytes = _DeriveBytes.GetBytes(32);
         }
         #endregion
@@ -28,7 +28,7 @@ namespace PuttyManager
 
         public bool isValidPass(string passwd)
         {
-            return hash == CalculateMD5Hash(SaltValue + passwd + SaltValue.Reverse());
+            return hash == CalculateMD5Hash(Configuration.SaltValue + passwd + Configuration.SaltValue.Reverse());
         }
 
         public string CalculateMD5Hash(string input)
@@ -52,10 +52,6 @@ namespace PuttyManager
         private readonly byte[] _InitVectorBytes;
         private readonly byte[] _KeyBytes;
         #endregion
-
-        private const string InitVector = "T=A4rAzu94ez-dra";
-        private const int PasswordIterations = 1000; //2;
-        private const string SaltValue = "TSE^%#%AER#QRTACc3fq23c2a3443t@#%$@#$@#$1323!@REFA$A#5AT$#!@$@#sFfzxv";
 
         public string Decrypt(string encryptedText)
         {
