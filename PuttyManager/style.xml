@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<doc>
+  <brackets left="&quot;" right="&quot;" />
+  <style name="Maroon" color="Maroon" fontStyle="Bold,Italic" />
+  <style name="Teal" color="Teal"/>
+  <style name="Blue" color="Blue"/>
+  <style name="Green" color="Green"/>
+  <style name="Gray" color="Gray"/>
+  <style name="Red" color="Red" />
+  <rule style="Blue">done|do|echo|sleep|while|if|fi|true|false|then|else|read|case|esac|in|switch|export</rule>
+  <rule style="Teal">#(.*)</rule>
+  <rule style="Green">\$[A-Za-z1-9]*</rule>
+  <rule style="Gray">\$(\(.*?)\)</rule>
+  <rule style="Maroon">(["'])(?:(?=(\\?))\2.)*?\1</rule>
+  <rule style="Red">\[(.*?)\]|\*|\=|\(|\)</rule>
+  <folding start="do" finish="done" options="IgnoreCase"/>
+  <folding start="then" finish="fi" options="IgnoreCase"/>
+  <folding start="case" finish="esac" options="IgnoreCase"/>
+</doc>
