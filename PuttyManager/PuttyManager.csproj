@@ -68,51 +68,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddProfileDialog.cs">
+    <Compile Include="Gui\AddProfileDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddProfileDialog.Designer.cs">
+    <Compile Include="Gui\AddProfileDialog.Designer.cs">
       <DependentUpon>AddProfileDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChangePasswordWindow.cs">
+    <Compile Include="Gui\ChangePasswordWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangePasswordWindow.Designer.cs">
+    <Compile Include="Gui\ChangePasswordWindow.Designer.cs">
       <DependentUpon>ChangePasswordWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Downloader.cs">
+    <Compile Include="Gui\MyListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Modules\ConfigManager.cs" />
+    <Compile Include="Gui\Downloader.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Downloader.Designer.cs">
+    <Compile Include="Gui\Downloader.Designer.cs">
       <DependentUpon>Downloader.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Gui\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Gui\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.cs">
+    <Compile Include="Gui\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow.Designer.cs">
+    <Compile Include="Gui\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddProfileDialog.resx">
+    <Compile Include="Modules\PuttyBinding.cs" />
+    <Compile Include="Modules\SimpleEncryption.cs" />
+    <EmbeddedResource Include="Gui\AddProfileDialog.resx">
       <DependentUpon>AddProfileDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChangePasswordWindow.resx">
+    <EmbeddedResource Include="Gui\ChangePasswordWindow.resx">
       <DependentUpon>ChangePasswordWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Downloader.resx">
+    <EmbeddedResource Include="Gui\Downloader.resx">
       <DependentUpon>Downloader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Gui\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow.resx">
+    <EmbeddedResource Include="Gui\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -141,9 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\connect-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\connect.png" />

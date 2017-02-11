@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PuttyManager.Gui;
+using System;
 
 namespace PuttyManager
 {
@@ -34,7 +35,7 @@ namespace PuttyManager
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.listView1 = new PTM.Controls.MyListView();
+            this.listView1 = new PuttyManager.Gui.MyListView();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -535,7 +536,7 @@ namespace PuttyManager
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private PTM.Controls.MyListView listView1;
+        private MyListView listView1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
