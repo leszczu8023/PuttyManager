@@ -9,7 +9,7 @@ namespace PuttyManager
     class Configuration
     {
         /*
-         *    PLEASE CHANGE THIS FILE BEFORE COMPILE!
+         *    PLEASE CHANGE THIS FILE RELEASE!
          */
         
         public const string InitVector = "T=A4rAzu94ez-dra";

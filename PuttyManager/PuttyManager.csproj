@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -84,6 +84,12 @@
     <Compile Include="Gui\MyListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Gui\PuttyHost.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\PuttyHost.Designer.cs">
+      <DependentUpon>PuttyHost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\ConfigManager.cs" />
     <Compile Include="Gui\Downloader.cs">
       <SubType>Form</SubType>
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\PuttyHost.resx">
+      <DependentUpon>PuttyHost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

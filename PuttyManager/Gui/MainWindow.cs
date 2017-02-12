@@ -1,17 +1,12 @@
-﻿using System;
+﻿using PuttyManager.Gui;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Sockets;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -22,11 +17,15 @@ namespace PuttyManager
         public ConfigManager puttyManager;
         public ImageList imageListLarge = new ImageList();
         public SimpleEncryption enc;
+        public Dictionary<IntPtr, string> clients;
+        
 
         public MainWindow()
         {
             InitializeComponent();
-            bool passok = false; ;
+            clients = new Dictionary<IntPtr, string>();
+            button1.Visible = false;
+            bool passok = false;
             while (!passok)
             {
 
@@ -278,9 +277,15 @@ namespace PuttyManager
             var clickedItem = senderList.HitTest(e.Location).Item;
             if (clickedItem != null)
             {
-                //MessageBox.Show(clickedItem.Index + "");
-                new PuttyBinding().Start(puttyManager.profiles[clickedItem.Index], this);
+                startputty(puttyManager.profiles[clickedItem.Index], this);
             }
+        }
+
+        private void startputty(PuttyManagerProfile profile, MainWindow parent)
+        {
+            Thread t = new Thread(() => new PuttyBinding().Start(profile, parent));
+            t.SetApartmentState(ApartmentState.MTA);
+            t.Start();
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -301,6 +306,49 @@ namespace PuttyManager
             {
 
             }
+        }
+
+
+        FormWindowState LastWindowState = FormWindowState.Minimized;
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+
+            // When window state changes
+            if (WindowState != LastWindowState)
+            {
+                LastWindowState = WindowState;
+                if (WindowState == FormWindowState.Maximized)
+                {
+
+                    MainWindow_ResizeEnd(null, null);
+                }
+                if (WindowState == FormWindowState.Normal)
+                {
+
+                    MainWindow_ResizeEnd(null, null);
+                }
+            }
+
+        }
+
+        public IntPtr createTabPageAndGetHandle(string name)
+        {
+            IntPtr handle = new IntPtr(0);
+            this.Invoke(new MethodInvoker(() => {
+                TabPage a = new TabPage(name);
+                
+
+                a.Name = "prs" + Program.index;
+                tabControl1.TabPages.Add(a);
+                tabControl1.SelectedIndex = tabControl1.TabPages.Count - 1;
+                
+                PuttyHost h = new PuttyHost();
+                tabControl1.TabPages[tabControl1.TabPages.Count - 1].Controls.Add(h);
+                h.Dock = DockStyle.Fill;
+                handle = ((PuttyHost)tabControl1.TabPages[tabControl1.TabPages.Count - 1].Controls[0]).getObj().Handle;
+            }));
+            
+            return handle;
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -338,7 +386,7 @@ namespace PuttyManager
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            new PuttyBinding().Start(puttyManager.profiles[listView1.SelectedIndices[0]], this);
+            startputty(puttyManager.profiles[listView1.SelectedIndices[0]], this);
         }
 
         private void stat_Click(object sender, EventArgs e)
@@ -362,6 +410,35 @@ namespace PuttyManager
                 saveConfig();
                 MessageBox.Show("Password changed successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex != 0)
+            {
+                if (MessageBox.Show("Are you sure to close a connection?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    var tb = tabControl1.SelectedTab;
+
+                    tabControl1.TabPages.Remove(tb);
+                    tb.Dispose();
+                    tb = null;
+                }
+            }       
+        }
+
+        private void MainWindow_ResizeEnd(object sender, EventArgs e)
+        {
+            if (clients == null) return;
+            foreach (var cl in clients)
+            {
+                PuttyBinding.WindowsReStyle(cl.Key);
+            }
+        }
+
+        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
+        {
+            button1.Visible = tabControl1.SelectedIndex != 0;
         }
     }
 }

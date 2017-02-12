@@ -35,7 +35,6 @@ namespace PuttyManager
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.listView1 = new PuttyManager.Gui.MyListView();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -61,6 +60,10 @@ namespace PuttyManager
             this.ppsswd = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.profileManager = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.listView1 = new PuttyManager.Gui.MyListView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -78,12 +81,15 @@ namespace PuttyManager
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.profileManager.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.Location = new System.Drawing.Point(12, 57);
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(0);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -95,7 +101,7 @@ namespace PuttyManager
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(741, 332);
+            this.splitContainer1.Size = new System.Drawing.Size(742, 333);
             this.splitContainer1.SplitterDistance = 487;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -103,6 +109,8 @@ namespace PuttyManager
             // 
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer2.IsSplitterFixed = true;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Margin = new System.Windows.Forms.Padding(0);
             this.splitContainer2.Name = "splitContainer2";
@@ -118,8 +126,8 @@ namespace PuttyManager
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(485, 330);
-            this.splitContainer2.SplitterDistance = 255;
+            this.splitContainer2.Size = new System.Drawing.Size(485, 331);
+            this.splitContainer2.SplitterDistance = 256;
             this.splitContainer2.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -137,23 +145,8 @@ namespace PuttyManager
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 205F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(481, 251);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(481, 252);
             this.tableLayoutPanel3.TabIndex = 2;
-            // 
-            // listView1
-            // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 42);
-            this.listView1.Margin = new System.Windows.Forms.Padding(0);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(481, 209);
-            this.listView1.TabIndex = 0;
-            this.listView1.TileSize = new System.Drawing.Size(168, 168);
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_KeyDown);
-            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // toolStripContainer1
             // 
@@ -284,6 +277,8 @@ namespace PuttyManager
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer3.IsSplitterFixed = true;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
             this.splitContainer3.Margin = new System.Windows.Forms.Padding(0);
             this.splitContainer3.Name = "splitContainer3";
@@ -296,8 +291,8 @@ namespace PuttyManager
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.button3);
-            this.splitContainer3.Size = new System.Drawing.Size(248, 330);
-            this.splitContainer3.SplitterDistance = 284;
+            this.splitContainer3.Size = new System.Drawing.Size(249, 331);
+            this.splitContainer3.SplitterDistance = 285;
             this.splitContainer3.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -330,7 +325,7 @@ namespace PuttyManager
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 77F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(248, 284);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(249, 285);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // stat
@@ -338,10 +333,10 @@ namespace PuttyManager
             this.stat.AutoSize = true;
             this.stat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.stat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.stat.Location = new System.Drawing.Point(0, 207);
+            this.stat.Location = new System.Drawing.Point(0, 208);
             this.stat.Margin = new System.Windows.Forms.Padding(0);
             this.stat.Name = "stat";
-            this.stat.Size = new System.Drawing.Size(248, 77);
+            this.stat.Size = new System.Drawing.Size(249, 77);
             this.stat.TabIndex = 13;
             this.stat.Text = "label.desc";
             this.stat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -353,10 +348,10 @@ namespace PuttyManager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.BackColor = System.Drawing.Color.DimGray;
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(0, 188);
+            this.label6.Location = new System.Drawing.Point(0, 189);
             this.label6.Margin = new System.Windows.Forms.Padding(0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(248, 19);
+            this.label6.Size = new System.Drawing.Size(249, 19);
             this.label6.TabIndex = 12;
             this.label6.Text = "Status";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -366,11 +361,12 @@ namespace PuttyManager
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.BackColor = System.Drawing.Color.DimGray;
+            this.label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(0, 140);
+            this.label10.Location = new System.Drawing.Point(0, 141);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(248, 19);
+            this.label10.Size = new System.Drawing.Size(249, 19);
             this.label10.TabIndex = 10;
             this.label10.Text = "Password:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -379,10 +375,10 @@ namespace PuttyManager
             // 
             this.pusr.AutoSize = true;
             this.pusr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pusr.Location = new System.Drawing.Point(0, 111);
+            this.pusr.Location = new System.Drawing.Point(0, 112);
             this.pusr.Margin = new System.Windows.Forms.Padding(0);
             this.pusr.Name = "pusr";
-            this.pusr.Size = new System.Drawing.Size(248, 29);
+            this.pusr.Size = new System.Drawing.Size(249, 29);
             this.pusr.TabIndex = 9;
             this.pusr.Text = "label.desc";
             this.pusr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -396,7 +392,7 @@ namespace PuttyManager
             this.label5.Location = new System.Drawing.Point(0, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(248, 19);
+            this.label5.Size = new System.Drawing.Size(249, 19);
             this.label5.TabIndex = 3;
             this.label5.Text = "Profile name";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -408,7 +404,7 @@ namespace PuttyManager
             this.pname.Location = new System.Drawing.Point(0, 19);
             this.pname.Margin = new System.Windows.Forms.Padding(0);
             this.pname.Name = "pname";
-            this.pname.Size = new System.Drawing.Size(248, 28);
+            this.pname.Size = new System.Drawing.Size(249, 29);
             this.pname.TabIndex = 5;
             this.pname.Text = "label.desc";
             this.pname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -417,10 +413,10 @@ namespace PuttyManager
             // 
             this.paddr.AutoSize = true;
             this.paddr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.paddr.Location = new System.Drawing.Point(0, 66);
+            this.paddr.Location = new System.Drawing.Point(0, 67);
             this.paddr.Margin = new System.Windows.Forms.Padding(0);
             this.paddr.Name = "paddr";
-            this.paddr.Size = new System.Drawing.Size(248, 26);
+            this.paddr.Size = new System.Drawing.Size(249, 26);
             this.paddr.TabIndex = 7;
             this.paddr.Text = "label.desc";
             this.paddr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -431,10 +427,10 @@ namespace PuttyManager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.BackColor = System.Drawing.Color.DimGray;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(0, 47);
+            this.label1.Location = new System.Drawing.Point(0, 48);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(248, 19);
+            this.label1.Size = new System.Drawing.Size(249, 19);
             this.label1.TabIndex = 6;
             this.label1.Text = "Server address:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -445,10 +441,10 @@ namespace PuttyManager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.BackColor = System.Drawing.Color.DimGray;
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(0, 92);
+            this.label8.Location = new System.Drawing.Point(0, 93);
             this.label8.Margin = new System.Windows.Forms.Padding(0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(248, 19);
+            this.label8.Size = new System.Drawing.Size(249, 19);
             this.label8.TabIndex = 8;
             this.label8.Text = "Username:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -457,10 +453,10 @@ namespace PuttyManager
             // 
             this.ppsswd.AutoSize = true;
             this.ppsswd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ppsswd.Location = new System.Drawing.Point(0, 159);
+            this.ppsswd.Location = new System.Drawing.Point(0, 160);
             this.ppsswd.Margin = new System.Windows.Forms.Padding(0);
             this.ppsswd.Name = "ppsswd";
-            this.ppsswd.Size = new System.Drawing.Size(248, 29);
+            this.ppsswd.Size = new System.Drawing.Size(249, 29);
             this.ppsswd.TabIndex = 11;
             this.ppsswd.Text = "label.desc";
             this.ppsswd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -473,7 +469,7 @@ namespace PuttyManager
             this.button3.Location = new System.Drawing.Point(0, 0);
             this.button3.Margin = new System.Windows.Forms.Padding(0);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(248, 42);
+            this.button3.Size = new System.Drawing.Size(249, 42);
             this.button3.TabIndex = 1;
             this.button3.Text = "Connect";
             this.button3.UseVisualStyleBackColor = true;
@@ -494,19 +490,73 @@ namespace PuttyManager
             this.label7.Text = "PuTTY Manager (PTTM)";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.profileManager);
+            this.tabControl1.Location = new System.Drawing.Point(4, 46);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(756, 365);
+            this.tabControl1.TabIndex = 3;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_TabIndexChanged);
+            // 
+            // profileManager
+            // 
+            this.profileManager.Controls.Add(this.splitContainer1);
+            this.profileManager.Location = new System.Drawing.Point(4, 22);
+            this.profileManager.Name = "profileManager";
+            this.profileManager.Padding = new System.Windows.Forms.Padding(3);
+            this.profileManager.Size = new System.Drawing.Size(748, 339);
+            this.profileManager.TabIndex = 0;
+            this.profileManager.Text = "Profile Manager";
+            this.profileManager.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(633, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(114, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Close connection";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(0, 42);
+            this.listView1.Margin = new System.Windows.Forms.Padding(0);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(481, 210);
+            this.listView1.TabIndex = 0;
+            this.listView1.TileSize = new System.Drawing.Size(168, 168);
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_KeyDown);
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 408);
+            this.ClientSize = new System.Drawing.Size(765, 416);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.splitContainer1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PuTTY Manager";
+            this.ResizeEnd += new System.EventHandler(this.MainWindow_ResizeEnd);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -529,6 +579,8 @@ namespace PuttyManager
             this.splitContainer3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.profileManager.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -536,11 +588,9 @@ namespace PuttyManager
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private MyListView listView1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label pusr;
@@ -551,19 +601,24 @@ namespace PuttyManager
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label ppsswd;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label stat;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private MyListView listView1;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.TabPage profileManager;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.TabControl tabControl1;
     }
 }
 

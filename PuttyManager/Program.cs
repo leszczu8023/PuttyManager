@@ -8,6 +8,7 @@ namespace PuttyManager
 {
     static class Program
     {
+        public static int index = 0;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
