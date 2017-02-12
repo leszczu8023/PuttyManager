@@ -178,12 +178,11 @@ namespace PuttyManager
             t.Start();
             p = parent;
             wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
-            wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
             wc.DownloadFileAsync(new Uri(downloadUrl), executableName);
-        }
-
-        private void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
+            while (wc.IsBusy)
+            {
+                Application.DoEvents();
+            }
             dwl.Invoke(new MethodInvoker(() => dwl.Close()));
             Start(run_afterdl, p);
             run_afterdl = null;

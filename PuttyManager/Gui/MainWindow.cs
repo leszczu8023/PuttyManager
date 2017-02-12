@@ -416,7 +416,7 @@ namespace PuttyManager
         {
             if (tabControl1.SelectedIndex != 0)
             {
-                if (MessageBox.Show("Are you sure to close a connection?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("Are you sure to close this connection?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     var tb = tabControl1.SelectedTab;
 
