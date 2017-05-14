@@ -160,5 +160,10 @@ done
             }
             this.mscript.Visible = checkBox1.Checked;
         }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            mPassword.UseSystemPasswordChar = !checkBox2.Checked;
+        }
     }
 }

@@ -79,7 +79,7 @@ namespace PuttyManager
                 p.StartInfo.CreateNoWindow = true;
                 p.StartInfo.EnvironmentVariables["LocalAppData"] = Environment.CurrentDirectory + "\\bin";
                 p.StartInfo.FileName = executableName;
-                p.StartInfo.Arguments = "-load \"PTTM Temporary Profile\" -ssh " + profile.user + "@" + profile.hostname + " -P " + profile.port + " -pw " + profile.pass + ((profile.useScript) ? " -m \"" + tmp + "\"" : "");
+                p.StartInfo.Arguments = "-load \"PTTM Temporary Profile\" -ssh " + profile.user + "@" + profile.hostname + " -P " + profile.port + " -pw \"" + profile.pass + "\"" + ((profile.useScript) ? " -m \"" + tmp + "\"" : "");
                 p.Start();
 
                 p.WaitForInputIdle();

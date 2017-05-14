@@ -1,6 +1,7 @@
 ﻿using PuttyManager.Gui;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -168,6 +169,8 @@ namespace PuttyManager
         {
             toolStripButton2.Enabled = !hm;
             toolStripButton3.Enabled = !hm;
+            toolStripButton5.Enabled = !hm;
+            toolStripButton6.Enabled = !hm;
             label3.Text = (hm) ? "Please, add some items to connect..." : "";
             label3.Text = "";
             pname.Text = "";
@@ -439,6 +442,60 @@ namespace PuttyManager
         private void tabControl1_TabIndexChanged(object sender, EventArgs e)
         {
             button1.Visible = tabControl1.SelectedIndex != 0;
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(puttyManager.filezillapath) || !File.Exists(puttyManager.filezillapath))
+            {
+
+                var browser = new OpenFileDialog();
+                browser.InitialDirectory = "C:\\Program Files\\FileZilla FTP Client";
+                browser.Multiselect = false;
+                browser.Title = "Select a FileZilla executable";
+                browser.Filter = "FileZilla|filezilla.exe";
+                browser.CheckFileExists = true;
+                browser.CheckPathExists = true;
+                browser.FileName = "filezilla.exe";
+                if (browser.ShowDialog() == DialogResult.OK)
+                {
+                    puttyManager.filezillapath = browser.FileName;
+                    saveConfig();
+                }
+                else
+                {
+                    return;
+                }
+            }
+            Process.Start(puttyManager.filezillapath, getConnectionString(puttyManager.profiles[listView1.SelectedIndices[0]]));
+        }
+
+        private string getConnectionString(PuttyManagerProfile profile)
+        {
+            return "sftp://" + profile.user + ":" + profile.pass + "@" + profile.hostname + ":" + profile.port;
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            var org_profile = puttyManager.profiles[listView1.SelectedIndices[0]];
+            var new_profile = new PuttyManagerProfile()
+            {
+                name = "Copy of " + org_profile.name,
+                hostname = org_profile.hostname,
+                user = org_profile.user,
+                pass = org_profile.pass,
+                comment = org_profile.comment,
+                script = org_profile.script,
+                useScript = org_profile.useScript,
+                port = org_profile.port
+            };
+            AddProfileDialog a = new AddProfileDialog(new_profile, this);
+            if (a.ShowDialog() == DialogResult.OK)
+            {
+                puttyManager.profiles.Add(a.profile);
+                saveConfig();
+                refreshProfileList(true);
+            }           
         }
     }
 }

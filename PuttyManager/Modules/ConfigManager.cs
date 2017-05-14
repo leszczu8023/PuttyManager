@@ -25,6 +25,7 @@ namespace PuttyManager
         }
 
         private string versionField;
+        private string filezillapathField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("profile", IsNullable = false)]
@@ -51,6 +52,20 @@ namespace PuttyManager
             set
             {
                 this.versionField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string filezillapath
+        {
+            get
+            {
+                return this.filezillapathField;
+            }
+            set
+            {
+                this.filezillapathField = value;
             }
         }
     }

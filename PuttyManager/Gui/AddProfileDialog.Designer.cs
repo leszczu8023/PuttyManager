@@ -49,6 +49,7 @@ namespace PuttyManager
             this.label6 = new System.Windows.Forms.Label();
             this.mscript = new FastColoredTextBoxNS.FastColoredTextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.mPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mscript)).BeginInit();
             this.SuspendLayout();
@@ -123,9 +124,9 @@ namespace PuttyManager
             // 
             this.mPassword.Location = new System.Drawing.Point(12, 154);
             this.mPassword.Name = "mPassword";
-            this.mPassword.PasswordChar = '*';
             this.mPassword.Size = new System.Drawing.Size(263, 20);
             this.mPassword.TabIndex = 4;
+            this.mPassword.UseSystemPasswordChar = true;
             this.mPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_KeyDown);
             // 
             // label3
@@ -148,7 +149,7 @@ namespace PuttyManager
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(200, 280);
+            this.button1.Location = new System.Drawing.Point(200, 318);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 7;
@@ -158,7 +159,7 @@ namespace PuttyManager
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 280);
+            this.button2.Location = new System.Drawing.Point(12, 318);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 8;
@@ -168,7 +169,7 @@ namespace PuttyManager
             // 
             // mComment
             // 
-            this.mComment.Location = new System.Drawing.Point(12, 225);
+            this.mComment.Location = new System.Drawing.Point(12, 263);
             this.mComment.Multiline = true;
             this.mComment.Name = "mComment";
             this.mComment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -179,7 +180,7 @@ namespace PuttyManager
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 209);
+            this.label5.Location = new System.Drawing.Point(12, 247);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 13);
             this.label5.TabIndex = 99;
@@ -214,21 +215,20 @@ namespace PuttyManager
             this.mscript.CommentPrefix = "#";
             this.mscript.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.mscript.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.mscript.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.mscript.IsReplaceMode = false;
             this.mscript.Location = new System.Drawing.Point(302, 25);
             this.mscript.Name = "mscript";
             this.mscript.Paddings = new System.Windows.Forms.Padding(0);
             this.mscript.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.mscript.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("mscript.ServiceColors")));
-            this.mscript.Size = new System.Drawing.Size(481, 278);
+            this.mscript.Size = new System.Drawing.Size(481, 316);
             this.mscript.TabIndex = 9;
             this.mscript.Zoom = 100;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 183);
+            this.checkBox1.Location = new System.Drawing.Point(12, 221);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(142, 17);
             this.checkBox1.TabIndex = 5;
@@ -236,12 +236,24 @@ namespace PuttyManager
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(12, 180);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(101, 17);
+            this.checkBox2.TabIndex = 100;
+            this.checkBox2.Text = "Show password";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
             // AddProfileDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 355);
+            this.ClientSize = new System.Drawing.Size(790, 405);
             this.ControlBox = false;
+            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.mscript);
@@ -291,5 +303,6 @@ namespace PuttyManager
         private System.Windows.Forms.Label label6;
         private FastColoredTextBox mscript;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }
