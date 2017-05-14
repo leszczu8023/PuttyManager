@@ -18,14 +18,13 @@ namespace PuttyManager
         public ConfigManager puttyManager;
         public ImageList imageListLarge = new ImageList();
         public SimpleEncryption enc;
-        public Dictionary<IntPtr, string> clients;
+        public Dictionary<IntPtr, PuttyHost> clients;
         
 
         public MainWindow()
         {
             InitializeComponent();
-            clients = new Dictionary<IntPtr, string>();
-            button1.Visible = false;
+            clients = new Dictionary<IntPtr, PuttyHost>();
             bool passok = false;
             while (!passok)
             {
@@ -312,46 +311,39 @@ namespace PuttyManager
         }
 
 
-        FormWindowState LastWindowState = FormWindowState.Minimized;
         private void Form1_Resize(object sender, EventArgs e)
         {
-
-            // When window state changes
-            if (WindowState != LastWindowState)
-            {
-                LastWindowState = WindowState;
-                if (WindowState == FormWindowState.Maximized)
-                {
-
-                    MainWindow_ResizeEnd(null, null);
-                }
-                if (WindowState == FormWindowState.Normal)
-                {
-
-                    MainWindow_ResizeEnd(null, null);
-                }
-            }
-
+            MainWindow_ResizeEnd(null, null);
         }
 
-        public IntPtr createTabPageAndGetHandle(string name)
+        public struct PtrHost
+        {
+            public IntPtr pointer;
+            public PuttyHost host;
+        }
+
+        public PtrHost createTabPageAndGetHandle(string name)
         {
             IntPtr handle = new IntPtr(0);
+            PuttyHost h = null;
             this.Invoke(new MethodInvoker(() => {
-                TabPage a = new TabPage(name);
-                
+                TabPage a = new TabPage(name);          
 
                 a.Name = "prs" + Program.index;
                 tabControl1.TabPages.Add(a);
                 tabControl1.SelectedIndex = tabControl1.TabPages.Count - 1;
                 
-                PuttyHost h = new PuttyHost();
+                h = new PuttyHost();
                 tabControl1.TabPages[tabControl1.TabPages.Count - 1].Controls.Add(h);
                 h.Dock = DockStyle.Fill;
                 handle = ((PuttyHost)tabControl1.TabPages[tabControl1.TabPages.Count - 1].Controls[0]).getObj().Handle;
             }));
             
-            return handle;
+            return new PtrHost
+            {
+                pointer = handle,
+                host = h
+            };
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -415,33 +407,13 @@ namespace PuttyManager
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (tabControl1.SelectedIndex != 0)
-            {
-                if (MessageBox.Show("Are you sure to close this connection?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    var tb = tabControl1.SelectedTab;
-
-                    tabControl1.TabPages.Remove(tb);
-                    tb.Dispose();
-                    tb = null;
-                }
-            }       
-        }
-
         private void MainWindow_ResizeEnd(object sender, EventArgs e)
         {
             if (clients == null) return;
             foreach (var cl in clients)
             {
-                PuttyBinding.WindowsReStyle(cl.Key);
+                PuttyBinding.WindowsReStyle(cl.Key, cl.Value);
             }
-        }
-
-        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
-        {
-            button1.Visible = tabControl1.SelectedIndex != 0;
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
@@ -496,6 +468,92 @@ namespace PuttyManager
                 saveConfig();
                 refreshProfileList(true);
             }           
+        }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.Graphics.DrawString(this.tabControl1.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+            
+            if (e.Index != 0)
+            {
+                e.Graphics.DrawImage(Properties.Resources.close, e.Bounds.Right - 24, e.Bounds.Top);
+            }
+
+            e.DrawFocusRectangle();
+        }
+
+        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
+        {
+            focusCurrentTab();
+        }
+
+        private void focusCurrentTab()
+        {
+            if (tabControl1.SelectedIndex > 0)
+            {
+                foreach (var cli in clients)
+                {
+                    foreach (TabPage tab in tabControl1.TabPages)
+                    {
+                        if (tab.Controls.Contains(cli.Value))
+                        {
+                            PuttyBinding.focus(cli.Key);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0112)
+            {
+                if (m.WParam == new IntPtr(0xF030))
+                {
+                    focusCurrentTab();
+                }
+            }
+            base.WndProc(ref m);
+        }
+
+        private void tabControl1_MouseDown(object sender, MouseEventArgs e)
+        {
+            for (int i = 1; i < this.tabControl1.TabPages.Count; i++)
+            {
+                Rectangle r = tabControl1.GetTabRect(i);
+                Rectangle closeButton = new Rectangle(r.Right - 24, r.Top, 16, 16);
+                if (closeButton.Contains(e.Location))
+                {
+                    if (tabControl1.SelectedIndex != 0)
+                    {
+                        if (MessageBox.Show("Are you sure to close this connection?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            var tb = tabControl1.TabPages[i];
+
+                            tabControl1.TabPages.Remove(tb);
+                            tb.Dispose();
+                            tb = null;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        private void MainWindow_Activated(object sender, EventArgs e)
+        {
+            focusCurrentTab();
+        }
+
+        private void MainWindow_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            focusCurrentTab();
+        }
+
+        private void MainWindow_KeyPress(object sender, KeyEventArgs e)
+        {
+            focusCurrentTab();
         }
     }
 }

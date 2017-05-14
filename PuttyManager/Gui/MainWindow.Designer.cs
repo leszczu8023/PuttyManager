@@ -42,6 +42,8 @@ namespace PuttyManager
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,6 +56,7 @@ namespace PuttyManager
             this.label10 = new System.Windows.Forms.Label();
             this.pusr = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.pname = new System.Windows.Forms.Label();
             this.paddr = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -62,10 +65,6 @@ namespace PuttyManager
             this.label7 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.profileManager = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.pname = new System.Windows.Forms.Label();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -106,7 +105,7 @@ namespace PuttyManager
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer1.Size = new System.Drawing.Size(935, 455);
-            this.splitContainer1.SplitterDistance = 680;
+            this.splitContainer1.SplitterDistance = 682;
             this.splitContainer1.TabIndex = 1;
             // 
             // splitContainer2
@@ -130,7 +129,7 @@ namespace PuttyManager
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(678, 453);
+            this.splitContainer2.Size = new System.Drawing.Size(680, 453);
             this.splitContainer2.SplitterDistance = 378;
             this.splitContainer2.TabIndex = 1;
             // 
@@ -149,7 +148,7 @@ namespace PuttyManager
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 205F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(674, 374);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(676, 374);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // listView1
@@ -159,7 +158,7 @@ namespace PuttyManager
             this.listView1.Margin = new System.Windows.Forms.Padding(0);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(674, 332);
+            this.listView1.Size = new System.Drawing.Size(676, 332);
             this.listView1.TabIndex = 0;
             this.listView1.TileSize = new System.Drawing.Size(168, 168);
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -172,14 +171,14 @@ namespace PuttyManager
             // 
             // toolStripContainer1.ContentPanel
             // 
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(674, 0);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(676, 0);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.LeftToolStripPanelVisible = false;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 19);
             this.toolStripContainer1.Margin = new System.Windows.Forms.Padding(0);
             this.toolStripContainer1.Name = "toolStripContainer1";
             this.toolStripContainer1.RightToolStripPanelVisible = false;
-            this.toolStripContainer1.Size = new System.Drawing.Size(674, 23);
+            this.toolStripContainer1.Size = new System.Drawing.Size(676, 23);
             this.toolStripContainer1.TabIndex = 4;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -242,6 +241,26 @@ namespace PuttyManager
             this.toolStripButton3.Text = "Edit profile";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton6.Text = "toolStripButton6";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton5.Text = "Start in FileZilla";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -266,7 +285,7 @@ namespace PuttyManager
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Margin = new System.Windows.Forms.Padding(0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(674, 19);
+            this.label4.Size = new System.Drawing.Size(676, 19);
             this.label4.TabIndex = 1;
             this.label4.Text = "Server list:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -290,7 +309,7 @@ namespace PuttyManager
             this.label2.Location = new System.Drawing.Point(0, -1);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(679, 19);
+            this.label2.Size = new System.Drawing.Size(681, 19);
             this.label2.TabIndex = 0;
             this.label2.Text = "Description:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -312,7 +331,7 @@ namespace PuttyManager
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.button3);
-            this.splitContainer3.Size = new System.Drawing.Size(249, 453);
+            this.splitContainer3.Size = new System.Drawing.Size(247, 453);
             this.splitContainer3.SplitterDistance = 407;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -346,7 +365,7 @@ namespace PuttyManager
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(249, 407);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(247, 407);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // stat
@@ -359,7 +378,7 @@ namespace PuttyManager
             this.stat.MaximumSize = new System.Drawing.Size(800, 90);
             this.stat.Name = "stat";
             this.stat.Padding = new System.Windows.Forms.Padding(50, 0, 50, 0);
-            this.stat.Size = new System.Drawing.Size(249, 30);
+            this.stat.Size = new System.Drawing.Size(249, 90);
             this.stat.TabIndex = 13;
             this.stat.Text = "label.desc";
             this.stat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -419,6 +438,18 @@ namespace PuttyManager
             this.label5.TabIndex = 3;
             this.label5.Text = "Profile name";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pname
+            // 
+            this.pname.AutoSize = true;
+            this.pname.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pname.Location = new System.Drawing.Point(0, 19);
+            this.pname.Margin = new System.Windows.Forms.Padding(0);
+            this.pname.Name = "pname";
+            this.pname.Size = new System.Drawing.Size(249, 32);
+            this.pname.TabIndex = 5;
+            this.pname.Text = "label.desc";
+            this.pname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // paddr
             // 
@@ -480,7 +511,7 @@ namespace PuttyManager
             this.button3.Location = new System.Drawing.Point(0, 0);
             this.button3.Margin = new System.Windows.Forms.Padding(0);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(249, 42);
+            this.button3.Size = new System.Drawing.Size(247, 42);
             this.button3.TabIndex = 1;
             this.button3.Text = "Connect";
             this.button3.UseVisualStyleBackColor = true;
@@ -507,12 +538,17 @@ namespace PuttyManager
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.profileManager);
+            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tabControl1.Location = new System.Drawing.Point(4, 46);
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(30, 3);
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(949, 487);
             this.tabControl1.TabIndex = 3;
+            this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_TabIndexChanged);
+            this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseDown);
             // 
             // profileManager
             // 
@@ -525,66 +561,22 @@ namespace PuttyManager
             this.profileManager.Text = "Profile Manager";
             this.profileManager.UseVisualStyleBackColor = true;
             // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(826, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(114, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Close connection";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // pname
-            // 
-            this.pname.AutoSize = true;
-            this.pname.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pname.Location = new System.Drawing.Point(0, 19);
-            this.pname.Margin = new System.Windows.Forms.Padding(0);
-            this.pname.Name = "pname";
-            this.pname.Size = new System.Drawing.Size(249, 32);
-            this.pname.TabIndex = 5;
-            this.pname.Text = "label.desc";
-            this.pname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "Start in FileZilla";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton6.Text = "toolStripButton6";
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 538);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label7);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PuTTY Manager";
             this.ResizeEnd += new System.EventHandler(this.MainWindow_ResizeEnd);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainWindow_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyPress);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -645,7 +637,6 @@ namespace PuttyManager
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.TabPage profileManager;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
         public System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Label pname;
         private System.Windows.Forms.ToolStripButton toolStripButton5;

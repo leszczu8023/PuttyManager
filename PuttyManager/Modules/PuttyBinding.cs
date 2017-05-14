@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PuttyManager.Gui;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -19,6 +20,9 @@ namespace PuttyManager
         private PuttyManagerProfile run_afterdl;
         private Downloader dwl;
 
+        [DllImport("User32")]
+        private static extern int SetForegroundWindow(IntPtr hwnd);
+
         [DllImport("user32.dll")]
         static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
@@ -27,6 +31,14 @@ namespace PuttyManager
         private const int SW_SHOWMAXIMIZED = 3;
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+
+        static readonly IntPtr HWND_TOP = new IntPtr(0);
+        public const int SWP_NOACTIVATE = 0x0010;
+        public const int SWP_SHOWWINDOW = 0x0040;
 
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool AssignProcessToJobObject(IntPtr job, IntPtr process);
@@ -82,15 +94,19 @@ namespace PuttyManager
                 p.StartInfo.Arguments = "-load \"PTTM Temporary Profile\" -ssh " + profile.user + "@" + profile.hostname + " -P " + profile.port + " -pw \"" + profile.pass + "\"" + ((profile.useScript) ? " -m \"" + tmp + "\"" : "");
                 p.Start();
 
-                p.WaitForInputIdle();
+                p.WaitForInputIdle(-1);
                 
                 removeTmpKey();
                 var a = parent.createTabPageAndGetHandle(profile.name);
-                SetParent(p.MainWindowHandle, a);
-                AssignProcessToJobObject(p.MainWindowHandle, a);
-                parent.clients.Add(p.MainWindowHandle, "prs" + Program.index);
+                SetParent(p.MainWindowHandle, a.pointer);
+                AssignProcessToJobObject(p.MainWindowHandle, a.pointer);
+                parent.clients.Add(p.MainWindowHandle, a.host);
                 string addd = "prs" + Program.index;
-                WindowsReStyle(p.MainWindowHandle);
+
+                WindowsReStyle(p.MainWindowHandle, a.host);
+                WindowsReStyle(p.MainWindowHandle, a.host);
+
+                SetForegroundWindow(p.MainWindowHandle);
 
                 p.WaitForExit();
                 
@@ -113,6 +129,11 @@ namespace PuttyManager
                 run_afterdl = profile;
                 downloadPutty(parent);
             }
+        }
+
+        public static void focus(IntPtr p)
+        {
+            SetForegroundWindow(p);
         }
 
         #region handles
@@ -150,14 +171,22 @@ namespace PuttyManager
         public static int WS_CAPTION = WS_BORDER | WS_DLGFRAME; //window with a title bar 
         public static int WS_SYSMENU = 0x00080000; //window menu  
         private const int WS_MINIMIZEBOX = 0x00020000;
+        private const int WS_MINIMIZE = 0x20000000;
+        private const int WS_THICKFRAME = 0x00040000;
+        private const int WS_MAXIMIZEBOX = 0x00010000;
         #endregion
 
-        public static void WindowsReStyle(IntPtr window)
+        public static void WindowsReStyle(IntPtr window, PuttyHost Panel1)
         {
             int style = GetWindowLong(window, GWL_STYLE);
-            SetWindowLongPtr(new HandleRef(null, window), GWL_STYLE, new IntPtr(WS_DLGFRAME));
-            ShowWindow(window, SW_SHOWNORMAL);
+            SetWindowLongPtr(new HandleRef(null, window), GWL_STYLE, new IntPtr(style & ~WS_CAPTION & ~WS_SYSMENU & ~WS_THICKFRAME & ~WS_MINIMIZE & ~WS_MAXIMIZEBOX));
             ShowWindow(window, SW_SHOWMAXIMIZED);
+            SetWindowPos(window, HWND_TOP,
+                    Panel1.ClientRectangle.Left,
+                    Panel1.ClientRectangle.Top,
+                    Panel1.ClientRectangle.Width,
+                    Panel1.ClientRectangle.Height,
+                    SWP_NOACTIVATE | SWP_SHOWWINDOW);
         }
         #endregion
 
